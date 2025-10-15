@@ -1,2 +1,46 @@
-Problem Alignment •	Người dùng thành phố lớn thường gặp tình trạng kẹt xe, giao đồ ăn chậm, ảnh hưởng đến trải nghiệm bữa ăn. •	Các ứng dụng giao đồ ăn truyền thống phụ thuộc vào tài xế, nên khó đảm bảo tốc độ và chi phí ổn định. •	Người dùng muốn theo dõi hành trình giao hàng trực tiếp (real-time tracking) nhưng các giải pháp hiện nay còn giới hạn. High-Level Approach •	Xây dựng web app giao diện đặt món FoodFast Drone Delivery đơn giản, trực quan. •	Cho phép khách hàng chọn địa điểm giao bằng bản đồ để drone hạ cánh. •	Hiển thị hành trình drone real-time trên bản đồ từ lúc cất cánh đến khi giao thành công. Narrative •	Một khách hàng mở app FoodFast và chọn món. •	Người dùng thêm vào giỏ hàng, áp dụng voucher và chọn thanh toán. •	Ứng dụng yêu cầu khách hàng chọn điểm giao hàng trên bản đồ . •	Sau khi xác nhận, drone cất cánh từ trạm gần nhất, khách hàng theo dõi lộ trình drone real-time trên bản đồ. •	Drone sẽ dừng lại tại vị trí đã chọn, đợi khách hàng nhận món và sau đó sẽ thông báo đến khách hàng “Đơn hàng đã giao thành công”. Goals •	Mang đến trải nghiệm giao đồ ăn siêu nhanh nhờ drone. •	Giảm sự phụ thuộc vào tài xế truyền thống, ổn định hơn về chi phí và thời gian. •	Tạo trải nghiệm độc đáo, hiện đại để tăng mức độ nhận diện thương hiệu FoodFast. •	Cho phép khách hàng theo dõi hành trình drone real-time, tăng độ tin cậy và hài lòng. Solution Alignment Key Features 1.	Ứng dụng giao đồ ăn thông minh tích hợp GPS để hiển thị vị trí drone đang bay. 2.	Hệ thống quản lý đơn hàng và trạng thái drone theo thời gian thực. 3.	Dashboard quản trị cho phép quản lý đơn, theo dõi drone, cập nhật thông tin nhà hàng.
-hãy build giúp tôi 1 web frontend sử dụng mock data không thôi về foodfast delivery, trong đó có các chức năng như đăng nhập, đăng xuất, danh mục sản phẩm, chi tiết sản phẩm, sort, search, giỏ hàng, thanh toán, đơn hàng, ngoài ra tôi muốn trong trang admin có CRUD các chức năng như quản lý sản phẩm, quản lý user, quản lý đơn hàng và dashboard, trang nhà hàng sẽ có chức năng CRUD sản phẩm của nhà hàng đó, xem và chỉnh sửa đơn hàng. Hãy làm bằng reactjs cho web và native react cho mobile app
+# FoodFast Drone Delivery Frontend Suite
+
+Bộ đôi ứng dụng web React và mobile React Native (Expo Router) sử dụng dữ liệu mock để mô phỏng trải nghiệm giao đồ ăn bằng drone FoodFast.
+
+## Thư mục
+
+- `web/`: Ứng dụng web dùng Vite + React.
+- `mobile/`: Ứng dụng mobile React Native (Expo Router) với cùng luồng chức năng.
+
+## Tính năng nổi bật
+
+### Ứng dụng web (`web/`)
+- Đăng nhập/đăng xuất với mock user (customer, admin, restaurant).
+- Trang đặt món: tìm kiếm, lọc theo danh mục, sắp xếp, xem chi tiết sản phẩm.
+- Giỏ hàng, thanh toán, xem lịch sử đơn hàng.
+- Drone tracker hiển thị tiến trình giao real-time (mô phỏng).
+- Admin dashboard: thống kê + CRUD sản phẩm, người dùng, đơn hàng.
+- Trung tâm nhà hàng: dashboard doanh thu, CRUD menu nhà hàng, chỉnh trạng thái & ghi chú đơn hàng.
+
+### Ứng dụng mobile (`mobile/`)
+- Giao diện tối ưu di động, chia sẻ mock data với web.
+- Các màn hình: Home, Catalog/Detail, Cart, Checkout, Orders.
+- Đăng nhập, dashboard Admin, quản trị sản phẩm/user/order; module nhà hàng quản lý menu & đơn hàng.
+
+## Chạy ứng dụng
+
+### Web
+```bash
+cd web
+npm install
+npm run dev
+```
+
+### Mobile (Expo)
+```bash
+cd mobile
+npm install
+npx expo start
+```
+
+> Các ứng dụng đều dùng dữ liệu mock, không cần backend.
+
+## Tài khoản mẫu
+- Customer: `customer@foodfast.io / 123456`
+- Admin: `admin@foodfast.io / admin`
+- Restaurant: `restaurant@foodfast.io / restaurant`
