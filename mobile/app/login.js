@@ -34,9 +34,9 @@ export default function LoginScreen() {
           Đăng nhập
         </Text>
         <Text style={styles.hint}>
-          Customer: customer@foodfast.io{'
-'}Admin: admin@foodfast.io{'
-'}Nhà hàng: restaurant@foodfast.io
+          Customer: customer@foodfast.io
+          {'\n'}Admin: admin@foodfast.io
+          {'\n'}Nhà hàng: restaurant@foodfast.io
         </Text>
       </View>
     </Screen>
