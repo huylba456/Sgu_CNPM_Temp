@@ -7,9 +7,7 @@ const Layout = () => {
   const { user, logout } = useAuth();
   const { cartItems, clearCart } = useCart();
 
-  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
@@ -47,7 +45,7 @@ const Layout = () => {
         <div className="header-actions">
           {isAuthenticated && (
             <Link to="/cart" className="header-link">
-              Giỏ hàng ({totalCartItems})
+              Giỏ hàng ({cartItemCount})
             </Link>
           )}
           {isAuthenticated ? (
