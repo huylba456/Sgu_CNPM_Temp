@@ -5,6 +5,24 @@ const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
+  const handleDecrease = (item) => {
+    const nextQuantity = Math.max(1, item.quantity - 1);
+    updateQuantity(item.id, nextQuantity);
+  };
+
+  const handleIncrease = (item) => {
+    updateQuantity(item.id, item.quantity + 1);
+  };
+
+  const handleManualChange = (item, value) => {
+    const parsed = Number(value);
+    if (Number.isNaN(parsed) || parsed < 1) {
+      updateQuantity(item.id, 1);
+      return;
+    }
+    updateQuantity(item.id, Math.floor(parsed));
+  };
+
   return (
     <div className="page">
       <header className="page-header">
@@ -28,16 +46,35 @@ const CartPage = () => {
                   <h4>{item.name}</h4>
                   <p className="muted">{item.restaurant}</p>
                   <div className="quantity">
-                    <label>
-                      Số lượng
-                      <input
-                        type="number"
-                        min="1"
-                        value={item.quantity}
-                        onChange={(event) => updateQuantity(item.id, Number(event.target.value))}
-                      />
-                    </label>
-                    <span>{(item.price * item.quantity).toLocaleString()} đ</span>
+                    <div className="quantity-control">
+                      <span className="quantity-label">Số lượng</span>
+                      <div className="quantity-stepper">
+                        <button
+                          type="button"
+                          className="quantity-button"
+                          onClick={() => handleDecrease(item)}
+                          aria-label="Giảm số lượng"
+                        >
+                          −
+                        </button>
+                        <input
+                          type="number"
+                          min="1"
+                          value={item.quantity}
+                          aria-label={`Số lượng của ${item.name}`}
+                          onChange={(event) => handleManualChange(item, event.target.value)}
+                        />
+                        <button
+                          type="button"
+                          className="quantity-button"
+                          onClick={() => handleIncrease(item)}
+                          aria-label="Tăng số lượng"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                    <span className="line-total">{(item.price * item.quantity).toLocaleString()} đ</span>
                   </div>
                 </div>
                 <button type="button" className="danger" onClick={() => removeFromCart(item.id)}>
@@ -49,7 +86,7 @@ const CartPage = () => {
           <footer className="cart-summary">
             <h3>Tổng cộng</h3>
             <p className="total">{total.toLocaleString()} đ</p>
-            <Link to="/checkout" className="primary">
+            <Link to="/checkout" className="primary checkout-button">
               Tiến hành thanh toán
             </Link>
           </footer>
