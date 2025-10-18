@@ -109,7 +109,7 @@ const AdminDashboardPage = () => {
       <h2>Dashboard tổng quan</h2>
       <div className="stat-grid">
         <StatsCard title="Tổng doanh thu" value="₫ 4.8B" trend="+18% so với tháng trước" />
-        <StatsCard title="Đơn hàng trong ngày" value="128" trend="2 drone đang hoạt động" />
+        <StatsCard title="Đơn hàng trong ngày" value="128" trend="+5% so với hôm qua" />
         <StatsCard title="Khách hàng mới" value={`${users.length}`} trend="+32% tuần này" />
       </div>
       <section className="panel">
