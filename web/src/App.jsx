@@ -13,6 +13,7 @@ import AdminDashboardPage from './pages/admin/AdminDashboardPage.jsx';
 import AdminProductsPage from './pages/admin/AdminProductsPage.jsx';
 import AdminUsersPage from './pages/admin/AdminUsersPage.jsx';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage.jsx';
+import AdminDronesPage from './pages/admin/AdminDronesPage.jsx';
 import RestaurantDashboardPage from './pages/restaurant/RestaurantDashboardPage.jsx';
 import RestaurantProductsPage from './pages/restaurant/RestaurantProductsPage.jsx';
 import RestaurantOrdersPage from './pages/restaurant/RestaurantOrdersPage.jsx';
@@ -75,6 +76,7 @@ function App() {
       >
         <Route index element={<AdminDashboardPage />} />
         <Route path="products" element={<AdminProductsPage />} />
+        <Route path="drones" element={<AdminDronesPage />} />
         <Route path="users" element={<AdminUsersPage />} />
         <Route path="orders" element={<AdminOrdersPage />} />
       </Route>

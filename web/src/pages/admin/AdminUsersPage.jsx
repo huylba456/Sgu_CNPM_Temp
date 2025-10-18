@@ -110,16 +110,16 @@ const AdminUsersPage = () => {
       {isModalOpen && (
         <Modal title={editingId ? 'Cập nhật người dùng' : 'Thêm người dùng'} onClose={closeModal}>
           <form className="form" onSubmit={handleSubmit}>
-            <div className="grid two">
-              <label>
+            <div className="grid two form-grid">
+              <label className="form-field">
                 Họ tên
                 <input name="name" value={form.name} onChange={handleChange} required />
               </label>
-              <label>
+              <label className="form-field">
                 Email
                 <input name="email" type="email" value={form.email} onChange={handleChange} required />
               </label>
-              <label>
+              <label className="form-field">
                 Vai trò
                 <select name="role" value={form.role} onChange={handleChange}>
                   {roles.map((role) => (
@@ -129,12 +129,12 @@ const AdminUsersPage = () => {
                   ))}
                 </select>
               </label>
-              <label>
+              <label className="form-field">
                 Số điện thoại
                 <input name="phone" value={form.phone} onChange={handleChange} />
               </label>
             </div>
-            <label>
+            <label className="form-field">
               Địa chỉ
               <input name="address" value={form.address} onChange={handleChange} />
             </label>

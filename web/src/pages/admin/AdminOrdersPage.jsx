@@ -106,6 +106,7 @@ const AdminOrdersPage = () => {
           type="search"
           placeholder="Tìm mã đơn hoặc khách hàng"
           value={filters.search}
+          className="order-search-input"
           onChange={(event) => setFilters((prev) => ({ ...prev, search: event.target.value }))}
         />
       </div>

@@ -124,16 +124,16 @@ const RestaurantProductsPage = () => {
       {isModalOpen && (
         <Modal title={editingId ? 'Cập nhật món' : 'Thêm món mới'} onClose={closeModal}>
           <form className="form" onSubmit={handleSubmit}>
-            <div className="grid two">
-              <label>
+            <div className="grid two form-grid">
+              <label className="form-field">
                 Tên món
                 <input name="name" value={form.name} onChange={handleChange} required />
               </label>
-              <label>
+              <label className="form-field">
                 Giá
                 <input name="price" type="number" value={form.price} onChange={handleChange} required />
               </label>
-              <label>
+              <label className="form-field">
                 Danh mục
                 <select name="category" value={form.category} onChange={handleChange}>
                   {categories.map((category) => (
@@ -144,11 +144,11 @@ const RestaurantProductsPage = () => {
                 </select>
               </label>
             </div>
-            <label>
+            <label className="form-field">
               Mô tả
               <textarea name="description" value={form.description} onChange={handleChange} />
             </label>
-            <label className="file-upload">
+            <label className="form-field file-upload">
               Ảnh minh hoạ
               <div className="file-upload-control">
                 <label htmlFor="restaurant-product-image" className="upload-button">
