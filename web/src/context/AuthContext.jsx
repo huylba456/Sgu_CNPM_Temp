@@ -4,13 +4,13 @@ import { users } from '../data/mockUsers.js';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(users[0]);
+  const [user, setUser] = useState(null);
 
   const login = (email, password) => {
     const found = users.find((item) => item.email === email && item.password === password);
     if (found) {
       setUser(found);
-      return { success: true };
+      return { success: true, user: found };
     }
     return { success: false, message: 'Thông tin đăng nhập không chính xác' };
   };

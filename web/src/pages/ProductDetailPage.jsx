@@ -2,10 +2,13 @@ import { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { products } from '../data/mockProducts.js';
 import { useCart } from '../hooks/useCart.js';
+import { useAuth } from '../hooks/useAuth.js';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const { user } = useAuth();
+  const isGuest = !user;
   const product = useMemo(() => products.find((item) => item.id === id), [id]);
 
   if (!product) {
@@ -30,7 +33,12 @@ const ProductDetailPage = () => {
         </ul>
         <div className="actions">
           <span className="price">{product.price.toLocaleString()} đ</span>
-          <button type="button" onClick={() => addToCart(product)}>
+          <button
+            type="button"
+            onClick={() => addToCart(product)}
+            disabled={isGuest}
+            title={isGuest ? 'Đăng nhập để đặt món' : undefined}
+          >
             Thêm vào giỏ
           </button>
         </div>
