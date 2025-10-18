@@ -4,10 +4,11 @@ import { initialOrders } from '../../data/mockOrders.js';
 import { useAuth } from '../../hooks/useAuth.js';
 
 const statuses = [
-  { value: 'processing', label: 'Chuẩn bị' },
-  { value: 'in_transit', label: 'Đang giao' },
+  { value: 'pending', label: 'Chờ xác nhận' },
+  { value: 'preparing', label: 'Đang chuẩn bị' },
+  { value: 'shipping', label: 'Đang giao' },
   { value: 'delivered', label: 'Đã giao' },
-  { value: 'cancelled', label: 'Đã huỷ' }
+  { value: 'cancelled', label: 'Hủy' }
 ];
 
 const RestaurantOrdersPage = () => {

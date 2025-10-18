@@ -3,10 +3,11 @@ import DataTable from '../../components/DataTable.jsx';
 import { initialOrders } from '../../data/mockOrders.js';
 
 const statuses = [
-  { value: 'processing', label: 'Chuẩn bị' },
-  { value: 'in_transit', label: 'Đang giao' },
+  { value: 'pending', label: 'Chờ xác nhận' },
+  { value: 'preparing', label: 'Đang chuẩn bị' },
+  { value: 'shipping', label: 'Đang giao' },
   { value: 'delivered', label: 'Đã giao' },
-  { value: 'cancelled', label: 'Đã huỷ' }
+  { value: 'cancelled', label: 'Hủy' }
 ];
 
 const AdminOrdersPage = () => {
@@ -105,6 +106,7 @@ const AdminOrdersPage = () => {
           type="search"
           placeholder="Tìm mã đơn hoặc khách hàng"
           value={filters.search}
+          className="order-search-input"
           onChange={(event) => setFilters((prev) => ({ ...prev, search: event.target.value }))}
         />
       </div>

@@ -24,6 +24,7 @@ export const users = [
     password: 'restaurant',
     role: 'restaurant',
     restaurantId: 'r1',
+    restaurantName: 'FastGrill Station',
     address: 'FastGrill Station - Thảo Điền',
     phone: '0908765432'
   }
