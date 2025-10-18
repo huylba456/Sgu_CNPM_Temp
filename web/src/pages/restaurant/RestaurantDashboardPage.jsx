@@ -4,6 +4,14 @@ import { restaurants } from '../../data/mockRestaurants.js';
 import { initialOrders } from '../../data/mockOrders.js';
 import { useAuth } from '../../hooks/useAuth.js';
 
+const statusLabels = {
+  pending: 'Chờ xác nhận',
+  preparing: 'Đang chuẩn bị',
+  shipping: 'Đang giao',
+  delivered: 'Đã giao',
+  cancelled: 'Hủy'
+};
+
 const RestaurantDashboardPage = () => {
   const { user } = useAuth();
   const restaurant = restaurants.find((item) => item.id === user?.restaurantId) ?? restaurants[0];
@@ -13,7 +21,7 @@ const RestaurantDashboardPage = () => {
   );
 
   const revenue = orders.reduce((sum, order) => sum + order.total, 0);
-  const inProgress = orders.filter((order) => order.status === 'in_transit' || order.status === 'processing').length;
+  const inProgress = orders.filter((order) => order.status === 'shipping' || order.status === 'preparing' || order.status === 'pending').length;
 
   return (
     <div className="page dashboard">
@@ -31,7 +39,7 @@ const RestaurantDashboardPage = () => {
             <div key={order.id} className="order-card compact">
               <h4>{order.id}</h4>
               <p>{order.customerName}</p>
-              <span className={`status ${order.status}`}>{order.status}</span>
+              <span className={`status ${order.status}`}>{statusLabels[order.status]}</span>
               <span>{order.total.toLocaleString()} đ</span>
             </div>
           ))}

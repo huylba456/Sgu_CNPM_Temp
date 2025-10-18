@@ -4,12 +4,14 @@ export const initialOrders = [
     customerName: 'Mai Anh',
     customerEmail: 'customer@foodfast.io',
     customerAddress: 'Vinhomes Grand Park',
+    deliveryAddress: 'Vinhomes Grand Park',
+    paymentMethod: 'Ví FoodFast Pay',
     items: [
       { id: 'p1', name: 'Burger Wagyu Signature', price: 189000, quantity: 1 },
       { id: 'p5', name: 'Tiramisu Espresso', price: 79000, quantity: 2 }
     ],
     total: 347000,
-    status: 'in_transit',
+    status: 'shipping',
     droneId: 'DR-02',
     restaurantId: 'r1',
     placedAt: '2024-05-01T10:15:00Z'
@@ -19,6 +21,8 @@ export const initialOrders = [
     customerName: 'Hữu Phát',
     customerEmail: 'phat@foodfast.io',
     customerAddress: 'Landmark 81',
+    deliveryAddress: 'Landmark 81',
+    paymentMethod: 'Thẻ tín dụng',
     items: [{ id: 'p2', name: 'Combo Sushi Thượng Hạng', price: 259000, quantity: 1 }],
     total: 259000,
     status: 'delivered',
@@ -31,14 +35,33 @@ export const initialOrders = [
     customerName: 'Tú Anh',
     customerEmail: 'tuanh@foodfast.io',
     customerAddress: 'Thủ Thiêm Eco',
+    deliveryAddress: 'Thủ Thiêm Eco',
+    paymentMethod: 'Chuyển khoản',
     items: [
       { id: 'p4', name: 'Salad Detox Xanh', price: 99000, quantity: 2 },
       { id: 'p6', name: 'Burger Gà Sốt Cay', price: 129000, quantity: 1 }
     ],
     total: 327000,
-    status: 'processing',
+    status: 'pending',
     droneId: null,
     restaurantId: 'r1',
     placedAt: '2024-05-02T08:30:00Z'
+  },
+  {
+    id: 'o4',
+    customerName: 'Bích Ngọc',
+    customerEmail: 'ngoc@foodfast.io',
+    customerAddress: 'Sala Đại Quang Minh',
+    deliveryAddress: 'Sala Đại Quang Minh',
+    paymentMethod: 'Ví FoodFast Pay',
+    items: [
+      { id: 'p8', name: 'Mì Ý Hải Sản', price: 149000, quantity: 1 },
+      { id: 'p9', name: 'Trà Hoa Hồng', price: 59000, quantity: 1 }
+    ],
+    total: 208000,
+    status: 'preparing',
+    droneId: 'DR-05',
+    restaurantId: 'r1',
+    placedAt: '2024-05-03T11:10:00Z'
   }
 ];

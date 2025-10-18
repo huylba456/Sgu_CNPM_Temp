@@ -373,6 +373,10 @@ textarea {
   object-fit: cover;
 }
 
+.card-image-link {
+  display: block;
+}
+
 .card-body {
   padding: 1.5rem;
   display: flex;
@@ -400,16 +404,22 @@ textarea {
 }
 
 .card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1.25rem;
+  display: grid;
+  gap: 0.9rem;
+  align-items: stretch;
   margin-top: auto;
 }
 
 .actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.6rem;
+}
+
+.actions .ghost-button,
+.actions .primary-button {
+  width: 100%;
+  justify-content: center;
 }
 
 .price {
@@ -524,12 +534,81 @@ textarea {
   object-fit: cover;
 }
 
+.quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.quantity-control {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.quantity-label {
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.quantity-stepper {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 999px;
+  overflow: hidden;
+  background: white;
+}
+
+.quantity-stepper input {
+  width: 64px;
+  text-align: center;
+  border: none;
+  box-shadow: none;
+  padding: 0.6rem 0.5rem;
+}
+
+.quantity-stepper input:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.quantity-button {
+  background: transparent;
+  color: var(--color-brand-dark);
+  font-size: 1.2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
+  box-shadow: none;
+  flex: 0 0 44px;
+}
+
+.quantity-button:hover {
+  background: rgba(37, 99, 235, 0.08);
+  transform: none;
+}
+
+.line-total {
+  font-weight: 600;
+  color: var(--color-brand-dark);
+}
+
 .cart-summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 1.5rem;
   border-top: 1px solid #e2e8f0;
+}
+
+.checkout-button {
+  border: 2px solid rgba(37, 99, 235, 0.4);
+  border-radius: 16px;
+  padding: 0.85rem 1.6rem;
+  font-size: 1rem;
 }
 
 .total {
@@ -644,6 +723,13 @@ textarea {
   gap: 0.5rem;
 }
 
+.order-card .order-meta {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.9rem;
+  color: #475467;
+}
+
 .order-card.compact {
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
@@ -657,12 +743,17 @@ textarea {
   justify-self: start;
 }
 
-.status.processing {
+.status.pending {
   background: #fef3c7;
   color: #92400e;
 }
 
-.status.in_transit {
+.status.preparing {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.status.shipping {
   background: #e0f2fe;
   color: #0369a1;
 }
@@ -675,6 +766,21 @@ textarea {
 .status.cancelled {
   background: #fee2e2;
   color: #b91c1c;
+}
+
+.cancel-order-button {
+  margin-top: 0.75rem;
+  align-self: start;
+  background: #dc2626;
+  color: white;
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  border-radius: 14px;
+  padding: 0.55rem 1.1rem;
+  box-shadow: none;
+}
+
+.cancel-order-button:hover {
+  background: #b91c1c;
 }
 
 .table-wrapper {
@@ -722,6 +828,71 @@ td.empty {
   display: grid;
   gap: 1rem;
   margin-bottom: 1.5rem;
+}
+
+.form-section {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.form-field {
+  display: grid;
+  gap: 0.4rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-weight: 500;
+}
+
+.order-summary {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+  background: white;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 50;
+}
+
+.modal {
+  background: white;
+  border-radius: 18px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  box-shadow: 0 30px 60px -34px rgba(15, 23, 42, 0.35);
+  text-align: center;
+}
+
+.modal h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
 }
 
 .form.inline .grid.two {
