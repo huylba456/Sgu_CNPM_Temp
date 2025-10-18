@@ -9,6 +9,8 @@ const Layout = () => {
 
   const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
+  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
   const isAuthenticated = Boolean(user);
