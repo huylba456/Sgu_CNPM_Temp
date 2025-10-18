@@ -14,7 +14,7 @@ const AdminDashboardPage = () => {
     .slice(0, 4)
     .map((item) => ({ name: item.name, restaurant: item.restaurant, rating: item.rating }));
 
-  const [drones, setDrones] = useState(seedDrones);
+  const [setDrones] = useState(seedDrones);
   const [isDroneModalOpen, setIsDroneModalOpen] = useState(false);
   const [editingDroneId, setEditingDroneId] = useState(null);
   const [droneToDelete, setDroneToDelete] = useState(null);
@@ -47,24 +47,24 @@ const AdminDashboardPage = () => {
     []
   );
 
-  const openCreateDrone = () => {
-    setDroneForm({
-      id: '',
-      status: 'Hoạt động',
-      battery: 100,
-      dailyDeliveries: 0,
-      totalDeliveries: 0,
-      distance: 0
-    });
-    setEditingDroneId(null);
-    setIsDroneModalOpen(true);
-  };
+  // const openCreateDrone = () => {
+  //   setDroneForm({
+  //     id: '',
+  //     status: 'Hoạt động',
+  //     battery: 100,
+  //     dailyDeliveries: 0,
+  //     totalDeliveries: 0,
+  //     distance: 0
+  //   });
+  //   setEditingDroneId(null);
+  //   setIsDroneModalOpen(true);
+  // };
 
-  const openEditDrone = (drone) => {
-    setDroneForm({ ...drone });
-    setEditingDroneId(drone.id);
-    setIsDroneModalOpen(true);
-  };
+  // const openEditDrone = (drone) => {
+  //   setDroneForm({ ...drone });
+  //   setEditingDroneId(drone.id);
+  //   setIsDroneModalOpen(true);
+  // };
 
   const handleDroneChange = (event) => {
     const { name, value } = event.target;
@@ -86,9 +86,9 @@ const AdminDashboardPage = () => {
     closeDroneModal();
   };
 
-  const confirmDeleteDrone = (drone) => {
-    setDroneToDelete(drone);
-  };
+  // const confirmDeleteDrone = (drone) => {
+  //   setDroneToDelete(drone);
+  // };
 
   const handleDeleteDrone = () => {
     if (!droneToDelete) return;
@@ -129,7 +129,7 @@ const AdminDashboardPage = () => {
         <h3>Món ăn được yêu thích</h3>
         <DataTable columns={columns} data={topProducts} />
       </section>
-      <section className="panel">
+      {/* <section className="panel">
         <div className="panel-header">
           <h3>Đội drone</h3>
           <button type="button" className="primary" onClick={openCreateDrone}>
@@ -173,7 +173,7 @@ const AdminDashboardPage = () => {
             </tbody>
           </table>
         </div>
-      </section>
+      </section> */}
       {isDroneModalOpen && (
         <Modal title={editingDroneId ? 'Cập nhật drone' : 'Thêm drone mới'} onClose={closeDroneModal}>
           <form className="form" onSubmit={handleDroneSubmit}>

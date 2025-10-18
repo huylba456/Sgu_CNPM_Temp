@@ -10,7 +10,7 @@ export const drones = [
   {
     id: 'DR-02',
     status: 'Đang bảo trì',
-    battery: 46,
+    battery: 8,
     dailyDeliveries: 6,
     totalDeliveries: 382,
     distance: 101
