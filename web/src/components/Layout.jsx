@@ -7,6 +7,8 @@ const Layout = () => {
   const { user, logout } = useAuth();
   const { cartItems } = useCart();
 
+  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
   const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
   return (
@@ -38,7 +40,7 @@ const Layout = () => {
         </nav>
         <div className="header-actions">
           <Link to="/cart" className="header-link">
-            Giỏ hàng ({cartItems.length})
+            Giỏ hàng ({totalCartItems})
           </Link>
           {user ? (
             <button type="button" onClick={logout} className="ghost-button">
