@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.js';
+import { useCart } from '../hooks/useCart.js';
 
 const LoginPage = () => {
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
+  const { clearCart } = useCart();
   const navigate = useNavigate();
   const [email, setEmail] = useState('customer@foodfast.io');
   const [password, setPassword] = useState('123456');
@@ -16,7 +18,21 @@ const LoginPage = () => {
       setError(result.message);
       return;
     }
-    navigate('/');
+    if (result.user.role === 'admin') {
+      navigate('/admin', { replace: true });
+      return;
+    }
+    if (result.user.role === 'restaurant') {
+      navigate('/restaurant', { replace: true });
+      return;
+    }
+    navigate('/', { replace: true });
+  };
+
+  const handleContinueAsGuest = () => {
+    clearCart();
+    logout();
+    navigate('/', { replace: true });
   };
 
   return (
@@ -46,6 +62,9 @@ const LoginPage = () => {
           <p>Admin: admin@foodfast.io / admin</p>
           <p>Nhà hàng: restaurant@foodfast.io / restaurant</p>
         </div>
+        <button type="button" className="link-button" onClick={handleContinueAsGuest}>
+          Tiếp tục mà không đăng nhập
+        </button>
       </form>
     </div>
   );

@@ -56,7 +56,7 @@ export const initialOrders = [
     paymentMethod: 'Ví FoodFast Pay',
     items: [
       { id: 'p8', name: 'Mì Ý Hải Sản', price: 149000, quantity: 1 },
-      { id: 'p9', name: 'Trà Hoa Hồng', price: 59000, quantity: 1 }
+      { id: 'p9', name: 'Trà Hoa Hồng Mật Ong', price: 59000, quantity: 1 }
     ],
     total: 208000,
     status: 'preparing',

@@ -13,6 +13,7 @@ const statusLabels = {
 
 const OrdersPage = () => {
   const [orders, setOrders] = useState(initialOrders);
+  const [orderToCancel, setOrderToCancel] = useState(null);
   const location = useLocation();
   const stats = useMemo(() => {
     const total = orders.length;
@@ -25,10 +26,25 @@ const OrdersPage = () => {
     };
   }, [orders]);
 
-  const handleCancelOrder = (id) => {
+  const openCancelModal = (id) => {
+    const selected = orders.find((order) => order.id === id);
+    if (selected) {
+      setOrderToCancel(selected);
+    }
+  };
+
+  const handleConfirmCancel = () => {
+    if (!orderToCancel) return;
     setOrders((prev) =>
-      prev.map((order) => (order.id === id ? { ...order, status: 'cancelled' } : order))
+      prev.map((order) =>
+        order.id === orderToCancel.id ? { ...order, status: 'cancelled' } : order
+      )
     );
+    setOrderToCancel(null);
+  };
+
+  const handleDismissModal = () => {
+    setOrderToCancel(null);
   };
 
   return (
@@ -73,15 +89,31 @@ const OrdersPage = () => {
                 <button
                   type="button"
                   className="cancel-order-button"
-                  onClick={() => handleCancelOrder(order.id)}
+                  onClick={() => openCancelModal(order.id)}
                 >
                   Hủy đơn hàng
                 </button>
               )}
-            </footer>
-          </article>
-        ))}
+          </footer>
+        </article>
+      ))}
       </section>
+      {orderToCancel && (
+        <div className="modal-overlay" role="dialog" aria-modal="true">
+          <div className="modal">
+            <h3>Xác nhận hủy đơn hàng</h3>
+            <p>Bạn có chắc chắn muốn hủy đơn {orderToCancel.id} không?</p>
+            <div className="modal-actions">
+              <button type="button" className="ghost-button" onClick={handleDismissModal}>
+                Không
+              </button>
+              <button type="button" className="danger" onClick={handleConfirmCancel}>
+                Có, hủy đơn
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -5,11 +5,15 @@ import DroneTracker from './DroneTracker.jsx';
 
 const Layout = () => {
   const { user, logout } = useAuth();
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
+
+  const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
+
+  const isAuthenticated = Boolean(user);
 
   return (
     <div className="app-shell">
@@ -24,9 +28,11 @@ const Layout = () => {
           <NavLink to="/products" className={navLinkClass}>
             Sản phẩm
           </NavLink>
-          <NavLink to="/orders" className={navLinkClass}>
-            Đơn hàng
-          </NavLink>
+          {isAuthenticated && (
+            <NavLink to="/orders" className={navLinkClass}>
+              Đơn hàng
+            </NavLink>
+          )}
           {user?.role === 'admin' && (
             <NavLink to="/admin" className={navLinkClass}>
               Admin
@@ -39,11 +45,20 @@ const Layout = () => {
           )}
         </nav>
         <div className="header-actions">
-          <Link to="/cart" className="header-link">
-            Giỏ hàng ({totalCartItems})
-          </Link>
-          {user ? (
-            <button type="button" onClick={logout} className="ghost-button">
+          {isAuthenticated && (
+            <Link to="/cart" className="header-link">
+              Giỏ hàng ({totalCartItems})
+            </Link>
+          )}
+          {isAuthenticated ? (
+            <button
+              type="button"
+              onClick={() => {
+                clearCart();
+                logout();
+              }}
+              className="ghost-button"
+            >
               Đăng xuất
             </button>
           ) : (

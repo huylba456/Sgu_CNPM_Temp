@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart.js';
+import { useAuth } from '../hooks/useAuth.js';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
+  const { user } = useAuth();
+  const isGuest = !user;
 
   return (
     <div className="card">
@@ -19,7 +22,13 @@ const ProductCard = ({ product }) => {
             <Link to={`/products/${product.id}`} className="ghost-button">
               Chi tiết
             </Link>
-            <button type="button" className="primary-button" onClick={() => addToCart(product)}>
+            <button
+              type="button"
+              className="primary-button"
+              onClick={() => addToCart(product)}
+              disabled={isGuest}
+              title={isGuest ? 'Đăng nhập để đặt món' : undefined}
+            >
               Thêm vào giỏ
             </button>
           </div>
