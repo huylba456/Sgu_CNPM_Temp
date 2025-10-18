@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import ProductCard from '../components/ProductCard.jsx';
 import CategoryFilter from '../components/CategoryFilter.jsx';
 import SearchBar from '../components/SearchBar.jsx';
@@ -24,12 +24,24 @@ const HomePage = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('featured');
+  const [activeRestaurant, setActiveRestaurant] = useState('all');
+  const [page, setPage] = useState(1);
+  const pageSize = 6;
+
+  const restaurants = useMemo(
+    () => Array.from(new Set(products.map((product) => product.restaurant))),
+    []
+  );
 
   const filteredProducts = useMemo(() => {
     let list = products;
 
     if (activeCategory !== 'all') {
       list = list.filter((product) => product.category === activeCategory);
+    }
+
+    if (activeRestaurant !== 'all') {
+      list = list.filter((product) => product.restaurant === activeRestaurant);
     }
 
     if (search.trim()) {
@@ -39,7 +51,18 @@ const HomePage = () => {
     }
 
     return sortProducts(list, sort);
-  }, [activeCategory, search, sort]);
+  }, [activeCategory, activeRestaurant, search, sort]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [activeCategory, activeRestaurant, search, sort]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+  const paginatedProducts = useMemo(() => {
+    const start = (currentPage - 1) * pageSize;
+    return filteredProducts.slice(start, start + pageSize);
+  }, [filteredProducts, currentPage, pageSize]);
 
   return (
     <div className="page home-page">
@@ -74,8 +97,16 @@ const HomePage = () => {
           <CategoryFilter
             categories={categories}
             activeCategory={activeCategory}
-            onSelect={setActiveCategory}
+            onSelect={(value) => setActiveCategory(value)}
           />
+          <div className="filter-group">
+            <span className="filter-label">Nhà hàng</span>
+            <CategoryFilter
+              categories={restaurants}
+              activeCategory={activeRestaurant}
+              onSelect={(value) => setActiveRestaurant(value)}
+            />
+          </div>
         </div>
       </section>
       <section className="product-section">
@@ -87,12 +118,42 @@ const HomePage = () => {
             </p>
           </div>
         </header>
-        {filteredProducts.length > 0 ? (
+        {paginatedProducts.length > 0 ? (
+          <>
           <div className="grid">
-            {filteredProducts.map((product) => (
+            {paginatedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+            {totalPages > 1 && (
+              <div className="pagination">
+                <button
+                  type="button"
+                  onClick={() => setPage((prev) => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                >
+                  Trước
+                </button>
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                  <button
+                    key={pageNumber}
+                    type="button"
+                    className={pageNumber === currentPage ? 'active' : ''}
+                    onClick={() => setPage(pageNumber)}
+                  >
+                    {pageNumber}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  onClick={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+                  disabled={currentPage === totalPages}
+                >
+                  Sau
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="empty-state">
             <h3>Không tìm thấy món ăn phù hợp</h3>
